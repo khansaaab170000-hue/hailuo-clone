@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hailuo AI - Clone</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#0b0b12;color:white}
+nav{display:flex;justify-content:space-between;padding:15px 20px}
+.logo{font-size:22px;font-weight:bold}
+.logo span{color:#8b5cf6}
+.nav-btn{background:#8b5cf6;color:white;border:none;padding:8px 16px;border-radius:20px;font-weight:bold}
+.hero{text-align:center;padding:30px 15px 10px}
+.hero h1{font-size:28px}
+.hero h1 span{color:#8b5cf6}
+.hero p{color:#aaa;margin-top:10px;font-size:14px}
+.tabs{display:flex;justify-content:center;gap:10px;margin:20px 0}
+.tabs button{background:#1e1e2e;color:white;border:1px solid #333;padding:10px 20px;border-radius:20px}
+.tabs button.active{background:white;color:black}
+.card{background:#17171f;margin:0 15px;padding:15px;border-radius:15px;border:1px solid #2a2a3a}
+.upload-box{display:flex;gap:10px}
+.upload{flex:1;background:#22222f;border:2px dashed #444;border-radius:12px;height:110px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;font-size:13px;color:#aaa;text-align:center}
+.upload b{color:white;font-size:22px}
+textarea{width:100%;background:#22222f;border:none;color:white;padding:12px;border-radius:12px;margin-top:12px;min-height:90px;outline:none}
+.row{display:flex;justify-content:space-between;margin-top:12px;color:#aaa;font-size:13px}
+.row select{background:#22222f;color:white;border:none;padding:8px;border-radius:8px}
+.gen{width:100%;background:#8b5cf6;color:white;border:none;padding:15px;border-radius:30px;font-size:16px;font-weight:bold;margin-top:15px}
+.result{margin:15px;background:#111;border-radius:15px;min-height:200px;display:flex;align-items:center;justify-content:center;color:#666;overflow:hidden;text-align:center;padding:10px}
+.result img{width:100%;display:none}
+.note{text-align:center;color:#777;font-size:12px;padding:0 20px 20px}
+</style>
+</head>
+<body>
+<nav><div class="logo">Hailuo <span>AI</span></div><button class="nav-btn">Get App</button></nav>
+<div class="hero"><h1>Create Stunning Videos<br><span>With AI</span></h1><p>Turn your Aloo image into a magical video in seconds</p></div>
+<div class="tabs"><button>Text to Video</button><button class="active">Img to Video</button></div>
+<div class="card">
+<div class="upload-box">
+<label class="upload" for="fileInput"><b>+</b>Start Frame<br>Tap to upload</label>
+<label class="upload" for="fileInput"><b>+</b>End Frame<br>Optional</label>
+<input type="file" id="fileInput" accept="image/*" hidden>
+</div>
+<textarea id="prompt">Big potato character watering a magical plant, water drops falling, golden sparkles glowing, small potato character pointing and laughing, warm morning sunlight in a cozy farmhouse garden, smooth motion, cinematic</textarea>
+<div class="row"><span>Model: Hailuo 01</span><select><option>Hailuo 01 - 720p</option><option>Hailuo 01-Live</option><option>Sora 2</option></select></div>
+<div class="row"><span>Duration: 6s</span><span>Credits: 10</span></div>
+<button class="gen" onclick="makeVideo()">✨ Generate Video - 10 Credits</button>
+</div>
+<div class="result" id="result"><span id="resultText">Your video will appear here</span><img id="previewImg"></div>
+<p class="note">Demo UI clone. Connect Kling / Runway API to make real videos.</p>
+<script>
+let imgUrl="";
+document.getElementById('fileInput').addEventListener('change',function(e){
+let file=e.target.files[0];
+if(file){imgUrl=URL.createObjectURL(file);let img=document.getElementById('previewImg');img.src=imgUrl;img.style.display='block';document.getElementById('resultText').style.display='none';}
+});
+function makeVideo(){
+let p=document.getElementById('prompt').value;
+if(!imgUrl){alert('Pehle Aloo wali photo upload karo bhai!');return;}
+document.getElementById('resultText').innerText='Video ban rahi hai... '+p.substring(0,60)+'... Please wait!';
+document.getElementById('resultText').style.display='block';
+setTimeout(()=>{document.getElementById('resultText').innerText='Demo complete! Asli video ke liye API connect karo.';},2000);
+}
+</script>
+</body>
+</html>
